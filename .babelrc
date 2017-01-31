@@ -1,0 +1,11 @@
+{   
+    "presets": [ "es2015", "babel-preset-stage-0" ],
+    "plugins": [
+      "inferno",
+      "transform-runtime",
+      "babel-plugin-inferno",
+      "babel-plugin-syntax-jsx",
+      "babel-plugin-syntax-object-rest-spread",
+      "babel-plugin-transform-object-rest-spread"
+    ]
+}
