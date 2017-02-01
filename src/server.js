@@ -1,10 +1,9 @@
+require("dotenv").config();
 const express     = require("express");
 const cors        = require("cors");
 const bodyParser  = require("body-parser");
 const Twitter     = require("twitter");
-require("dotenv").config();
-
-const headers = require("./headers");
+const headers     = require("./headers");
 
 const port = 3000;
 const app = express();
@@ -16,7 +15,7 @@ app.use(headers.headers);
 app.use(bodyParser.json());
 app.use(cors());
 
-// Process.env this shit
+
 const client = new Twitter({
   consumer_key:         process.env.TWITTER_CONSUMER_KEY,
   consumer_secret:      process.env.TWITTER_CONSUMER_SECRET,
@@ -30,24 +29,36 @@ const params = {
   include_entities: "true",   // I think entities simply means media, not sure
 };
 
-app.get("/mostRecentArchillectMedia", (req, res) => {
+let currentImage = null;
+
+const fetchNewestTweet = () => {
+  setTimeout(() => {
+    fetchNewestTweet();
+  }, 1000 * 60 * 10); // Archillect uploads a new photo every 10 minutes
   client.get("statuses/user_timeline", params, (err, response) => {
     if (err) {
       console.error(err);
     } else if (response[0].extended_entities.media[0].type === "animated_gif") {
-      res.json({
+      currentImage = {
         url: response[0].extended_entities.media[0].video_info.variants[0].url,
         type: "animated_gif",
-      });
+      };
     } else if (response[0].extended_entities.media[0].type === "photo") {
-      res.json({
+      console.log(response[0].entities.media[0].media_url_https);
+      currentImage = {
         url: response[0].entities.media[0].media_url_https,
         type: "photo",
-      });
+      };
     } else {
-      res.send(new Error("Type is neither photo nor animated_gif"));
+      throw new Error("Type is neither photo nor animated_gif");
     }
   });
+};
+
+fetchNewestTweet();
+
+app.get("/fetchNewestArchillectMedia", (req, res) => {
+  res.json(currentImage);
 });
 
 app.get("/getTweetMediaById/:id", (req, res) => {

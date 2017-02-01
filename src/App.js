@@ -19,7 +19,7 @@ export default class App extends Component {
     this.hasLoaded = this.hasLoaded.bind(this);
   }
   componentWillMount() {
-    axios.get("http://localhost:3000/mostRecentArchillectMedia")
+    axios.get("http://localhost:3000/fetchNewestArchillectMedia")
     .then((response) => {
       this.setState({
         src: response.data.url,
