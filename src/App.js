@@ -5,6 +5,8 @@ import leftPad from "left-pad";
 import Searchbar from "./js/components/Searchbar";
 import ImageCanvas from "./js/components/ImageCanvas";
 
+require("./stylesheets/main.scss");
+
 export default class App extends Component {
   constructor(props) {
     super(props);
