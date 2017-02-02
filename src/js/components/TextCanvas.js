@@ -4,7 +4,7 @@ import Component from "inferno-component";
 
 const ColorThief = require("color-thief-standalone");
 
-export default class ImageCanvas extends Component {
+export default class TextCanvas extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -114,7 +114,7 @@ export default class ImageCanvas extends Component {
   }
 
   updateCanvas(primary, accent) {
-    const canvas = document.getElementById(this.props.id);
+    const canvas = document.getElementById("canvas");
     canvas.width = this.calcWidth(canvas);
     canvas.height = this.calcHeight(canvas);
 
@@ -248,7 +248,7 @@ export default class ImageCanvas extends Component {
     return (
       <div className="image-canvas">
         <canvas
-          id={this.props.id}
+          id="canvas"
           className="text-canvas"
           style={{
             display: (

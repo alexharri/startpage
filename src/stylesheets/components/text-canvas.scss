@@ -1,0 +1,35 @@
+.image-canvas {
+  min-width: 100%;
+}
+
+
+.text-canvas {
+  display: block;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-animation: text-canvas .5s;
+}
+
+@-webkit-keyframes text-canvas {
+  from  { opacity: 0; }
+  to    { opacity: 1; }
+}
+@-moz-keyframes text-canvas {
+  from  { opacity: 0; }
+  to    { opacity: 1; }
+}
+@keyframes text-canvas {
+  from  { opacity: 0; }
+  to    { opacity: 1; }
+}
+
+.canvas-container {
+  margin: 30px auto 0px;
+}
+
+#canvas1 {
+  position: relative;
+  top: -50px;
+}

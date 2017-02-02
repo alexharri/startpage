@@ -93,6 +93,7 @@ export default class Searchbar extends Component {
             onKeyPress={e => this.onEnter(e)}
             placeholder={this.engines[this.state.engineIndex] + " or type URL"}
             type="text"
+            id="input"
             value={this.state.value}
           />
         </div>

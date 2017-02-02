@@ -1,0 +1,13 @@
+@mixin transition($duration) {
+  -webkit-transition: $duration cubic-bezier(0.175, 0.435, 0.515, 0.990);
+  -moz-transition:    $duration cubic-bezier(0.175, 0.435, 0.515, 0.990);
+  -ms-transition:     $duration cubic-bezier(0.175, 0.435, 0.515, 0.990);
+  -o-transition:      $duration cubic-bezier(0.175, 0.435, 0.515, 0.990);
+  transition:         $duration cubic-bezier(0.175, 0.435, 0.515, 0.990);
+}
+
+@mixin box-shadow($hOffset, $vOffset, $blur, $spread, $color) {
+  -webkit-box-shadow: $hOffset $vOffset $blur $spread $color;
+  -moz-box-shadow:    $hOffset $vOffset $blur $spread $color;
+  box-shadow:         $hOffset $vOffset $blur $spread $color;
+}

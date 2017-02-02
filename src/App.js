@@ -3,7 +3,7 @@ import Component from "inferno-component";
 import axios from "axios";
 import leftPad from "left-pad";
 import Searchbar from "./js/components/Searchbar";
-import ImageCanvas from "./js/components/ImageCanvas";
+import TextCanvas from "./js/components/TextCanvas";
 
 require("./stylesheets/main.scss");
 
@@ -61,7 +61,7 @@ export default class App extends Component {
           + ":" + pad0(this.state.time.getMinutes())
           + ":" + pad0(this.state.time.getSeconds());
     const canvas = (
-      <ImageCanvas
+      <TextCanvas
         text={"Get to work friend"}
         padding={10}
         interval={150}
@@ -74,7 +74,6 @@ export default class App extends Component {
           thickness: 10,
         }}
         img={this.state.src}
-        id="canvas"
         isVideo={this.state.isVideo}
       />
     );
