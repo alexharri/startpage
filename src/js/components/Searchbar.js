@@ -28,6 +28,12 @@ export default class Searchbar extends Component {
     this.changeSearchEngine = this.changeSearchEngine.bind(this);
   }
 
+  onEnter(e) {
+    if (e.keyCode === 13) {
+      this.googleSearch(e.target.value);
+    }
+  }
+
   parseInput(e) {
     const value = e.target.value;
     if (e.keyCode === 13) {
@@ -81,8 +87,10 @@ export default class Searchbar extends Component {
         <div id="searchbar">
           <div className="searchbar-icon" style={{ backgroundImage: "url(images/google_icon.png)" }} />
           <input
+            autoFocus
             className="searchbar"
             onInput={e => this.parseInput(e)}
+            onKeyPress={e => this.onEnter(e)}
             placeholder={this.engines[this.state.engineIndex] + " or type URL"}
             type="text"
             value={this.state.value}

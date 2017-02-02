@@ -58,6 +58,8 @@ const fetchNewestTweet = () => {
 fetchNewestTweet();
 
 app.get("/fetchNewestArchillectMedia", (req, res) => {
+  // For testing
+  //res.json({ type: "animated_gif", url: "https://video.twimg.com/tweet_video/C3mY9QdWIAAZP4H.mp4" });
   res.json(currentImage);
 });
 

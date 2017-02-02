@@ -9,17 +9,20 @@ export default class ImageCanvas extends Component {
     super(props);
     this.state = {
       visible: false,
-      primary: [40, 40, 40],
-      accent: [40, 40, 40],
+      primary: [30, 30, 30],
+      accent: [150, 150, 150],
     };
     this.percentageStart = 0;
     this.cycleStart = 0;
     this.palette = false;
+    this.isPrimaryLighter = null;
+
     this.updateCanvas = this.updateCanvas.bind(this);
     this.generateFontStyle = this.generateFontStyle.bind(this);
     this.calcWidth = this.calcWidth.bind(this);
     this.calcHeight = this.calcHeight.bind(this);
     this.calculateLuminosity = this.calculateLuminosity.bind(this);
+    this.shortGradient = this.shortGradient.bind(this);
   }
   componentWillMount() {
     this.interval = setInterval(() => {
@@ -32,6 +35,12 @@ export default class ImageCanvas extends Component {
       }
       this.updateCanvas();
     }, this.props.interval);
+
+    if (this.props.isVideo) {
+      this.setState({
+        img: true,
+      });
+    }
   }
 
   componentDidMount() {
@@ -58,6 +67,10 @@ export default class ImageCanvas extends Component {
      * Makes sure font is loaded before rendering
      * Credit goes to http://stackoverflow.com/a/5371426
      */
+    if (this.props.isVideo) {
+      this.updateCanvas();
+      return;
+    }
     const colorThief = new ColorThief();
     const img = new Image();
     img.crossOrigin = "Anonymous";
@@ -68,6 +81,8 @@ export default class ImageCanvas extends Component {
         primary: palette[0],
         accent: palette[1],
       });
+      this.isPrimaryLighter =
+        this.calculateLuminosity(...palette[0]) < this.calculateLuminosity(...palette[1]);
       this.updateCanvas(palette[0], palette[1]);
     };
     img.src = this.props.img;
@@ -222,21 +237,19 @@ export default class ImageCanvas extends Component {
     const padding = this.props.padding * 2; // Padding both sides
     return extrusion + height + padding;
   }
+  shortGradient(percent) {
+    return this.getGradientValue(
+      [...this.state.primary],
+      [...this.state.accent],
+      percent);
+  }
 
   render() {
-    const sbb = this.getGradientValue(
-      { r: this.state.primary[0], g: this.state.primary[1], b: this.state.primary[2] },
-      { r: this.state.accent[0], g: this.state.accent[1], b: this.state.accent[2] },
-      90);
-    const sbt = this.getGradientValue(
-      { r: this.state.primary[0], g: this.state.primary[1], b: this.state.primary[2] },
-      { r: this.state.accent[0], g: this.state.accent[1], b: this.state.accent[2] },
-      10);
     return (
       <div className="image-canvas">
-        <canvas 
+        <canvas
           id={this.props.id}
-          class="text-canvas"
+          className="text-canvas"
           style={{
             display: (
               (this.state.font && this.state.img)
@@ -252,21 +265,41 @@ export default class ImageCanvas extends Component {
 // Weird indentation because template strings
 `
 html {
-  background: rgb(${this.state.primary.join(",")});
-  -webkit-animation: html-fade .5s;
+  background: ${this.shortGradient(90)};
+  -webkit-animation: html 1s;
 }
-@-webkit-keyframes html-fade {
-  from { background: rgb(40,40,40); }
-  to   { background: rgb(${this.state.primary.join(",")}); }
+@-webkit-keyframes html {
+  from { background: rgb(255,255,255); }
+  to   { background: ${this.shortGradient(90)}; }
 }
+
+#searchbar {
+  background: ${this.shortGradient(100)};
+  opacity: 1;
+  -webkit-animation: searchbar 1s;
+}
+@-webkit-keyframes searchbar {
+  from { background: rgb(20,20,20);              opacity: 0; }
+  to   { background: ${this.shortGradient(100)}; opacity: 1; }
+}
+
 .searchbar {
-  background: ${sbb};
-  color: ${sbt};
-  -webkit-animation: searchbar-fade .5s;
+  color: ${this.shortGradient(10)};
 }
-@-webkit-keyframes searchbar-fade {
-  from { background: rgb(20,20,20); color: rgb(155,155,155)}
-  to   { background: ${sbb}; color: ${sbt}}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: ${this.shortGradient(65)};
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: ${this.shortGradient(65)};
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: ${this.shortGradient(65)};
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: ${this.shortGradient(65)};
+  opacity: 1;
 }
 `
             :

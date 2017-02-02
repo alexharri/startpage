@@ -11,6 +11,8 @@ export default class App extends Component {
     this.state = {
       time: new Date(),
       src: "",
+      isVideo: false,
+      maxImgHeight: 28,
     };
     setInterval(() => {
       this.setState({ time: new Date() });
@@ -19,8 +21,16 @@ export default class App extends Component {
     this.hasLoaded = this.hasLoaded.bind(this);
   }
   componentWillMount() {
+    const img = new Image();
+    img.onload = () => {
+      this.setState({
+        maxImgHeight: Math.ceil(img.height * (390 / img.width)), // 390 is width of container
+      });
+    };
+
     axios.get("http://localhost:3000/fetchNewestArchillectMedia")
     .then((response) => {
+      img.src = response.data.url;
       this.setState({
         src: response.data.url,
         isVideo: this.isVideo(response.data.type),
@@ -45,13 +55,12 @@ export default class App extends Component {
   }
   render() {
     const pad0 = n => leftPad(n, 2, 0);
-    const hasLoaded = this.hasLoaded();
     const time =  pad0(this.state.time.getHours())
           + ":" + pad0(this.state.time.getMinutes())
           + ":" + pad0(this.state.time.getSeconds());
     const canvas = (
       <ImageCanvas
-        text={"hey friend, how was your day?"}
+        text={"Get to work friend"}
         padding={10}
         interval={150}
         fontStyle={{
@@ -62,52 +71,62 @@ export default class App extends Component {
           segments: 5,
           thickness: 10,
         }}
-        img={this.state.src ? (this.state.isVideo ? null : this.state.src) : null}
+        img={this.state.src}
         id="canvas"
+        isVideo={this.state.isVideo}
       />
     );
     return (
-      <div style={{ margin: "100px" }}>
+      <div style={{ margin: "100px", overflow: "hidden", paddingBottom: "20px" }}>
+        <style>
+          {
+            (this.state.maxImgHeight > 28) ?
+`
+
+#image {
+  opacity: 1;
+  -webkit-animation: img-opacity 1s;
+}
+@-webkit-keyframes img-opacity {
+  from  { opacity: 0; }
+  to    { opacity: 1; }
+}
+`
+: "yah"
+          }
+        </style>
         <div className="row">
-          <div className="col left">
-            <div className="canvas-container">
-              {
-                this.state.src ? ( // eslint-disable-line no-nested-ternary
-                  this.state.isVideo // eslint-disable-line no-nested-ternary
-                  ? null
-                  : (
-                    hasLoaded
-                    ? canvas
-                    : null
-                  )
-                ) : null
-              }
-            </div>
+          <div className="canvas-container">
+            {
+              this.state.src
+                ? canvas
+                : null
+            }
           </div>
-          <div className="col right">
-          </div>
+          <div className="col right" />
         </div>
         <div className="row">
           <div className="col left">
-            <div className="date">
-              {/*pad0(this.state.time.getDate())}
-              /{pad0(this.state.time.getMonth() + 1)}
-              /{this.state.time.getFullYear()*/}
-            </div>
             {
-              this.state.src ? ( // eslint-disable-line no-nested-ternary
-                this.state.isVideo
-                ? (
-                  <div id="video">
-                    <video src={this.state.src} autoPlay loop className="video" alt="" />
-                  </div>
-                )
-                : (
-                  <div id="image">
-                    <img src={this.state.src} id="img" className="image" alt="" />
-                  </div>
-                )
-              ) : null
+              !this.state.isVideo
+              ? (
+                <div className="image-container">
+                  {
+                    this.state.src
+                    ? <img src={this.state.src} id="image" className="image" alt="" />
+                    : null
+                  }
+                </div>
+              )
+              : (
+                <div className="video-container">
+                  {
+                    this.state.src
+                    ? <video src={this.state.src} autoPlay loop className="video" alt="" />
+                    : null
+                  }
+                </div>
+              )
             }
           </div>
           <Searchbar />
