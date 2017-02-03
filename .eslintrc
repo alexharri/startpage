@@ -36,6 +36,7 @@
     "inferno/jsx-filename-extension": 0,
     "inferno/jsx-sort-props": 0,
     "inferno/jsx-no-literals": 0,
+    "inferno/jsx-handler-names": 0,
     "inferno/no-set-state": 0,
   },
   "env": {

@@ -38,6 +38,11 @@ const fetchNewestTweet = () => {
   client.get("statuses/user_timeline", params, (err, response) => {
     if (err) {
       console.error(err);
+    } else if (!response[0].extended_entities) {
+      currentImage = {
+        url: "./images/collection/C3npDqEXAAUitU_.jpg",
+        type: "photo",
+      };
     } else if (response[0].extended_entities.media[0].type === "animated_gif") {
       currentImage = {
         url: response[0].extended_entities.media[0].video_info.variants[0].url,

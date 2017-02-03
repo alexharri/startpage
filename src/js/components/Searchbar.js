@@ -91,30 +91,19 @@ export default class Searchbar extends Component {
 
   render() {
     return (
-      <SearchbarContentEditable
-        onChange={this.onChange}
-        onEnter={this.googleSearch}
-        html={this.state.value}
+      <input
+        autoFocus
+        tabIndex="1"
+        className="searchbar"
+        onInput={e => this.parseInput(e)}
+        onKeyPress={e => this.onEnter(e)}
         placeholder={this.engines[this.state.engineIndex] + " or type URL"}
+        type="text"
+        id="input"
+        value={this.state.value}
+
+        style={{ backgroundImage: "url(images/google_icon.png)" }}
       />
     );
   }
 }
-
-/*
-<span
-  contentEditable
-  autoFocus
-  className="searchbar"
-  onInput={e => this.parseInput(e)}
-  onKeyPress={e => this.onEnter(e)}
-  placeholder={this.engines[this.state.engineIndex] + " or type URL"}
-  type="text"
-  id="input"
-  value={this.state.value}
-
-  style={{ backgroundImage: "url(images/google_icon.png)" }}
-/>
-
-
-*/

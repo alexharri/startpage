@@ -4,6 +4,7 @@ import axios from "axios";
 import leftPad from "left-pad";
 import Searchbar from "./js/components/Searchbar";
 import TextCanvas from "./js/components/TextCanvas";
+import { focusOnInput } from "./js/helpers/selection";
 
 require("./stylesheets/main.scss");
 
@@ -40,6 +41,18 @@ export default class App extends Component {
     })
     .catch((err) => {
       console.error(err);
+    });
+  }
+
+  componentDidMount() {
+    document.addEventListener("click", (e) => {
+      e.preventDefault();
+      const activeEl = document.activeElement;
+      const input = document.getElementById("input");
+      console.log("AAAAA")
+      console.log({activeEl})
+      console.log({input})
+      console.log(e.target);
     });
   }
   isVideo(type) {
@@ -107,23 +120,28 @@ export default class App extends Component {
           <div className="col right" />
         </div>
         <div className="row">
-          <div class="container">
+          <div className="container">
             {
               !this.state.isVideo
               ? (
                 <div className="image-container">
                   {
                     this.state.src
-                    ? <img src={this.state.src} id="image" className="image" alt="" />
+                    ? <img
+                      src={this.state.src}
+                      id="image"
+                      className="image"
+                      alt=""
+                      />
                     : null
                   }
                 </div>
               )
               : (
-                <div className="video-container">
+                <div className="image-container">
                   {
                     this.state.src
-                    ? <video src={this.state.src} autoPlay loop className="video" alt="" />
+                    ? <video src={this.state.src} autoPlay loop className="image" alt="" />
                     : null
                   }
                 </div>
