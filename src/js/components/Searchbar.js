@@ -1,5 +1,6 @@
 import Inferno from "inferno";
 import Component from "inferno-component";
+import SearchbarContentEditable from "./SearchbarContentEditable"
 
 export default class Searchbar extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export default class Searchbar extends Component {
     this.parseInput = this.parseInput.bind(this);
     this.googleSearch = this.googleSearch.bind(this);
     this.changeSearchEngine = this.changeSearchEngine.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onEnter(e) {
@@ -35,6 +37,8 @@ export default class Searchbar extends Component {
   }
 
   parseInput(e) {
+    console.log("parsing input")
+    console.log(e.srcElement.innerHTML);
     const value = e.target.value;
     if (e.keyCode === 13) {
       this.googleSearch(e.target.value);
@@ -81,23 +85,36 @@ export default class Searchbar extends Component {
     this.setState({ value: "" });
   }
 
+  onChange(e) {
+    console.log(e);
+  }
+
   render() {
     return (
-      <div className="col right">
-        <div id="searchbar">
-          <div className="searchbar-icon" style={{ backgroundImage: "url(images/google_icon.png)" }} />
-          <input
-            autoFocus
-            className="searchbar"
-            onInput={e => this.parseInput(e)}
-            onKeyPress={e => this.onEnter(e)}
-            placeholder={this.engines[this.state.engineIndex] + " or type URL"}
-            type="text"
-            id="input"
-            value={this.state.value}
-          />
-        </div>
-      </div>
+      <SearchbarContentEditable
+        onChange={this.onChange}
+        onEnter={this.googleSearch}
+        html={this.state.value}
+        placeholder={this.engines[this.state.engineIndex] + " or type URL"}
+      />
     );
   }
 }
+
+/*
+<span
+  contentEditable
+  autoFocus
+  className="searchbar"
+  onInput={e => this.parseInput(e)}
+  onKeyPress={e => this.onEnter(e)}
+  placeholder={this.engines[this.state.engineIndex] + " or type URL"}
+  type="text"
+  id="input"
+  value={this.state.value}
+
+  style={{ backgroundImage: "url(images/google_icon.png)" }}
+/>
+
+
+*/

@@ -4,8 +4,8 @@
   @include transition(.25s);
   @include box-shadow(2px, 2px, 0px, 0px, rgba(0,0,0,0.29));
 
-  max-width: 100%;
-  min-width: 100%;
+  max-width: 400px;
+  max-height: 400px;
   position: relative;
   bottom: 0px;
   opacity: 0;
@@ -23,10 +23,15 @@
 }
 
 .image-container {
-  min-width: 100%;
+  max-width: 440px;
   min-height: 28px;
+  max-height: 420px;
+  display: inline-block;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 10px;
+  padding-left: 20px; /* This offsets the searchbar's 10px left margin */
 }
 .video-container {
   min-width: 100%;

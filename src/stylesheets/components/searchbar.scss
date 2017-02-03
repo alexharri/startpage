@@ -1,26 +1,12 @@
-#searchbar {
+@import "../mixins";
+
+.searchbar-container {
   overflow: hidden;
-  opacity: 0;
-  background: rgb(45,45,45);
-}
-
-.searchbar {
-  height: 22px;
-  width: calc(100% - 28px - 9px); /* 4px to compensate for padding */
+  display: inline-block;
   vertical-align: top;
-  float: left;
-  padding: 3px 2px 1px 6px;
-  font-size: 16px;
-  line-height: 16px;
-  color: rgb(200,200,200);
-  border: thin solid rgba(0,0,0,.2);
-  border-left: none;
-  background: none;
+  margin-top: 10px;
 }
 
-.searchbar:focus {
-  outline: none;
-}
 ::-webkit-input-placeholder { /* Chrome */
   color: rgb(80,80,80);
 }
@@ -36,6 +22,7 @@
   opacity: 1;
 }
 .searchbar-icon {
+  @include transition(.5s);
   width: 26px;
   height: 26px;
   float: left;
@@ -47,4 +34,38 @@
   background-repeat: no-repeat;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+.searchbar {
+  @include transition(.5s);
+  height: 22px;
+  width: 0px; /* 4px to compensate for padding */
+  max-width: 330px;
+  vertical-align: top;
+  padding: 4px 0px 0px;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgb(200,200,200);
+  border: 0px solid rgba(0,0,0,.2);
+  display: inline-block;
+  background-color: rgba(40,40,40,0);
+  background-size: 16px;
+  background-position: -20px 5px;
+  background-repeat: no-repeat;
+  margin: 10px 0px 0px 10px;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+
+  &:focus {
+    outline: none;
+    width: 250px;
+    border: thin solid rgba(0,0,0,.2);
+    padding: 3px 2px 1px 28px;
+    background-position: 5px 5px;
+  }
+}
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block; /* For Firefox */
 }

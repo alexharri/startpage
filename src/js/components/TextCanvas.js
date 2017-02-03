@@ -273,33 +273,22 @@ html {
   to   { background: ${this.shortGradient(90)}; }
 }
 
-#searchbar {
-  background: ${this.shortGradient(100)};
+.searchbar {
+  background-color: ${this.shortGradient(100)};
   opacity: 1;
   -webkit-animation: searchbar 1s;
 }
 @-webkit-keyframes searchbar {
-  from { background: rgb(20,20,20);              opacity: 0; }
-  to   { background: ${this.shortGradient(100)}; opacity: 1; }
+  from { background-color: rgba(20,20,20,0);           opacity: 0; }
+  to   { background-color: ${this.shortGradient(100)}; opacity: 1; }
 }
 
 .searchbar {
   color: ${this.shortGradient(10)};
 }
 
-::-webkit-input-placeholder { /* Chrome */
+[contenteditable=true]:empty:before {
   color: ${this.shortGradient(65)};
-}
-:-ms-input-placeholder { /* IE 10+ */
-  color: ${this.shortGradient(65)};
-}
-::-moz-placeholder { /* Firefox 19+ */
-  color: ${this.shortGradient(65)};
-  opacity: 1;
-}
-:-moz-placeholder { /* Firefox 4 - 18 */
-  color: ${this.shortGradient(65)};
-  opacity: 1;
 }
 `
             :

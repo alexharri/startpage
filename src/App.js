@@ -107,7 +107,7 @@ export default class App extends Component {
           <div className="col right" />
         </div>
         <div className="row">
-          <div className="col left">
+          <div class="container">
             {
               !this.state.isVideo
               ? (
@@ -129,8 +129,8 @@ export default class App extends Component {
                 </div>
               )
             }
+            <Searchbar />
           </div>
-          <Searchbar />
         </div>
       </div>
     );
