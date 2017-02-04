@@ -287,8 +287,31 @@ html {
   color: ${this.shortGradient(10)};
 }
 
-[contenteditable=true]:empty:before {
+::-webkit-input-placeholder { /* Chrome */
   color: ${this.shortGradient(65)};
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: ${this.shortGradient(65)};
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: ${this.shortGradient(65)};
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: ${this.shortGradient(65)};
+  opacity: 1;
+}
+
+.image {
+  -webkit-box-shadow: 0 0 ${this.shortGradient(0)}, 0 0 ${this.shortGradient(0)}, 0 0 rgba(0,0,0,0.5);
+  -moz-box-shadow:    0 0 ${this.shortGradient(0)}, 0 0 ${this.shortGradient(0)}, 0 0 rgba(0,0,0,0.5);
+  box-shadow:         0 0 ${this.shortGradient(0)}, 0 0 ${this.shortGradient(0)}, 0 0 rgba(0,0,0,0.5);
+}
+
+.image:hover {
+  -webkit-box-shadow: 5px 5px ${this.shortGradient(0)}, -5px -5px ${this.shortGradient(0)}, 0 5px 20px rgba(0,0,0,0.3);
+  -moz-box-shadow:    5px 5px ${this.shortGradient(0)}, -5px -5px ${this.shortGradient(0)}, 0 5px 20px rgba(0,0,0,0.3);
+  box-shadow:         5px 5px ${this.shortGradient(0)}, -5px -5px ${this.shortGradient(0)}, 0 5px 20px rgba(0,0,0,0.3);
 }
 `
             :

@@ -21,19 +21,10 @@ export default class App extends Component {
       this.setState({ time: new Date() });
     }, 1000);
     this.isVideo = this.isVideo.bind(this);
-    this.hasLoaded = this.hasLoaded.bind(this);
   }
   componentWillMount() {
-    const img = new Image();
-    img.onload = () => {
-      this.setState({
-        maxImgHeight: Math.ceil(img.height * (390 / img.width)), // 390 is width of container
-      });
-    };
-
     axios.get("http://localhost:3000/fetchNewestArchillectMedia")
     .then((response) => {
-      img.src = response.data.url;
       this.setState({
         src: response.data.url,
         isVideo: this.isVideo(response.data.type),
@@ -55,19 +46,11 @@ export default class App extends Component {
       console.log(e.target);
     });
   }
+
   isVideo(type) {
     return (type === "animated_gif");
   }
-  hasLoaded() {
-    return true;
 
-    // Do some cool stuff with this in the future
-    const img = document.getElementById("img");
-    if (!img) {
-      return false;
-    }
-    return img.complete;
-  }
   render() {
     const pad0 = n => leftPad(n, 2, 0);
     const time =  pad0(this.state.time.getHours())
@@ -92,23 +75,6 @@ export default class App extends Component {
     );
     return (
       <div style={{ margin: "100px", overflow: "hidden", paddingBottom: "20px" }}>
-        <style>
-          {
-            (this.state.maxImgHeight > 28) ?
-`
-
-#image {
-  opacity: 1;
-  -webkit-animation: img-opacity 1s;
-}
-@-webkit-keyframes img-opacity {
-  from  { opacity: 0; }
-  to    { opacity: 1; }
-}
-`
-: "yah"
-          }
-        </style>
         <div className="row">
           <div className="canvas-container">
             {
@@ -121,32 +87,29 @@ export default class App extends Component {
         </div>
         <div className="row">
           <div className="container">
-            {
-              !this.state.isVideo
-              ? (
-                <div className="image-container">
-                  {
-                    this.state.src
-                    ? <img
-                      src={this.state.src}
-                      id="image"
-                      className="image"
-                      alt=""
-                      />
-                    : null
-                  }
-                </div>
-              )
-              : (
-                <div className="image-container">
-                  {
-                    this.state.src
-                    ? <video src={this.state.src} autoPlay loop className="image" alt="" />
-                    : null
-                  }
-                </div>
-              )
-            }
+            <div className="image-container">
+              {
+                this.state.src
+                ? (
+                  !this.state.isVideo
+                ? (
+                  <img
+                    src={this.state.src}
+                    id="image"
+                    className="image"
+                    alt=""
+                  />
+                ) : (
+                  <video
+                    src={this.state.src}
+                    autoPlay
+                    loop
+                    className="image"
+                    alt=""
+                  />
+                )) : null
+              }
+            </div>
             <Searchbar />
           </div>
         </div>

@@ -64,7 +64,8 @@ fetchNewestTweet();
 
 app.get("/fetchNewestArchillectMedia", (req, res) => {
   // For testing
-  // res.json({ type: "photo", url: "https://pbs.twimg.com/media/C3sU5gqUEAEBLLn.jpg" });
+  // res.json({ type: "photo", url: "https://pbs.twimg.com/media/C3rXF69WAAAvvmc.jpg:large" });
+  // res.json({ type: "animated_gif", url: "https://video.twimg.com/tweet_video/C3wC8FSWYAIU56l.mp4" });
   res.json(currentImage);
 });
 

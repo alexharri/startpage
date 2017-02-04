@@ -8,7 +8,8 @@
   max-height: 400px;
   position: relative;
   bottom: 0px;
-  opacity: 0;
+  opacity: 1;
+  -webkit-animation: image-opacity 1s;
 
   &:hover {
     @include box-shadow(5px, 5px, 0px, 0px, rgba(0,0,0,0.22));
@@ -16,10 +17,9 @@
     bottom: 3px;
   }
 }
-
-.video {
-  max-width: 100%;
-  min-width: 100%;
+@-webkit-keyframes image-opacity {
+  from  { opacity: 0; }
+  to    { opacity: 1; }
 }
 
 .image-container {
@@ -28,12 +28,8 @@
   max-height: 420px;
   display: inline-block;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   margin: 0 auto;
   padding: 10px;
   padding-left: 20px; /* This offsets the searchbar's 10px left margin */
-}
-.video-container {
-  min-width: 100%;
-  position: relative;
 }
