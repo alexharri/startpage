@@ -1,12 +1,5 @@
 @import "../mixins";
 
-.searchbar-container {
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
-}
-
 ::-webkit-input-placeholder { /* Chrome */
   color: rgb(80,80,80);
 }
@@ -61,6 +54,7 @@
     width: 250px;
     border: thin solid rgba(0,0,0,.2);
     padding: 3px 2px 1px 28px;
+    margin: 10px 20px 0px 10px;
     background-position: 5px 5px;
   }
 }

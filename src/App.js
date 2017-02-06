@@ -35,18 +35,6 @@ export default class App extends Component {
     });
   }
 
-  componentDidMount() {
-    document.addEventListener("click", (e) => {
-      e.preventDefault();
-      const activeEl = document.activeElement;
-      const input = document.getElementById("input");
-      console.log("AAAAA")
-      console.log({activeEl})
-      console.log({input})
-      console.log(e.target);
-    });
-  }
-
   isVideo(type) {
     return (type === "animated_gif");
   }
@@ -69,12 +57,12 @@ export default class App extends Component {
           segments: 5,
           thickness: 10,
         }}
-        img={this.state.src}
+        src={this.state.src}
         isVideo={this.state.isVideo}
       />
     );
     return (
-      <div style={{ margin: "100px", overflow: "hidden", paddingBottom: "20px" }}>
+      <div style={{ margin: "75px 0px", overflow: "hidden", paddingBottom: "20px" }}>
         <div className="row">
           <div className="canvas-container">
             {

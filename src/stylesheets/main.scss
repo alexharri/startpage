@@ -84,7 +84,7 @@ html {
 
 .row {
   min-height: 165px;
-  max-width:  1080px;
+  max-width:  800px;
   overflow: visible;
   margin: 0 auto;
 }
@@ -108,6 +108,6 @@ html {
 .container {
   display: block;
   margin: 0 auto;
-  min-width: 900px;
+  min-width: 750px; /* So searchbar doesn't go under the image */
   text-align: center;
 }

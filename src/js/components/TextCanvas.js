@@ -63,14 +63,16 @@ export default class TextCanvas extends Component {
       this.setState({ font: true });
     };
 
-    /**
-     * Makes sure font is loaded before rendering
-     * Credit goes to http://stackoverflow.com/a/5371426
-     */
+    // Technology ain't there yet :(
     if (this.props.isVideo) {
       this.updateCanvas();
       return;
     }
+
+    /**
+     * Generates a palette of the two dominant colors in an image.
+     * Unfortunately doesn't work for mp4 files, that'd be cool.
+     */
     const colorThief = new ColorThief();
     const img = new Image();
     img.crossOrigin = "Anonymous";
@@ -85,7 +87,7 @@ export default class TextCanvas extends Component {
         this.calculateLuminosity(...palette[0]) < this.calculateLuminosity(...palette[1]);
       this.updateCanvas(palette[0], palette[1]);
     };
-    img.src = this.props.img;
+    img.src = this.props.src;
   }
 
   componentWillUnmount() {
