@@ -5,7 +5,7 @@ const bodyParser  = require("body-parser");
 const Twitter     = require("twitter");
 const headers     = require("./headers");
 
-const port = 3000;
+const port = 3456;
 const app = express();
 
 // Serve static files in production
@@ -64,7 +64,7 @@ fetchNewestTweet();
 
 app.get("/fetchNewestArchillectMedia", (req, res) => {
   // For testing
-  // res.json({ type: "photo", url: "https://pbs.twimg.com/media/C3rXF69WAAAvvmc.jpg:large" });
+  // res.json({ type: "photo", url: "https://pbs.twimg.com/media/C4yh2NnXAAEzLI3.jpg:large" });
   // res.json({ type: "animated_gif", url: "https://video.twimg.com/tweet_video/C3wC8FSWYAIU56l.mp4" });
   res.json(currentImage);
 });

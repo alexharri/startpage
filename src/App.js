@@ -23,7 +23,7 @@ export default class App extends Component {
     this.isVideo = this.isVideo.bind(this);
   }
   componentWillMount() {
-    axios.get("http://localhost:3000/fetchNewestArchillectMedia")
+    axios.get("http://localhost:3456/fetchNewestArchillectMedia")
     .then((response) => {
       this.setState({
         src: response.data.url,
