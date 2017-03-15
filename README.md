@@ -24,6 +24,21 @@ As for the title text, it was a fun little experiment with canvas. It takes in a
 />
 ```
 
+Take a look here if you're interested in seeing the inner workings of the [TextCanvas](https://github.com/alexharri/startpage/blob/master/src/js/components/TextCanvas.js) component.
+
+It also features a fun little custom search bar I made. It has a few different modes which search different websites.
+* !g for Google  
+* !r for Reddit  
+* !y for YouTube  
+* etc
+
+And then in each one you have some commands to customize the search. For example when in Google you have the option to pick a few commands.  
+* -i to search for images  
+* -m to search Google Maps  
+* -n for News
+
+The searchbar is far less complete and sophisticated than the text canvas, but when I find the time this is \#1 on the list of things to fix
+
 Here are some examples of how it looks live
 
 ![alt tag](https://raw.githubusercontent.com/alexharri/startpage/master/examples/example-1.jpg)
@@ -31,4 +46,3 @@ Here are some examples of how it looks live
 ![alt tag](https://raw.githubusercontent.com/alexharri/startpage/master/examples/example-3.jpg)
 ![alt tag](https://raw.githubusercontent.com/alexharri/startpage/master/examples/example-4.jpg)
 ![alt tag](https://raw.githubusercontent.com/alexharri/startpage/master/examples/example-5.jpg)
-![alt tag](https://raw.githubusercontent.com/alexharri/startpage/master/examples/settings.jpg)
