@@ -4,6 +4,8 @@ A custom startpage I made for myself.
 
 It downloads the most recent image for a twitter account, (I chose Archillect as an example, it's a really cool bot that posts and finds images based on social media response). It then grabs the two dominant colors from the image via the ColorThief npm module and styles the page with it.
 
+Here's an [animated example](https://gyazo.com/102265021521cdc1bcc4596cc5983abb) of it in action. It's really low quality but it shows the general idea.
+
 As for the title text, it was a fun little experiment with canvas. It takes in a few font styles and does some interesting things with them.
 
 ```jsx
